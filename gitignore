@@ -1,0 +1,14 @@
+# Telegram login and personal settings — never commit
+*.session
+*.session-journal
+uploader_config.json
+uploaded.json
+
+# Downloaded media
+mega_download/
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+venv/
