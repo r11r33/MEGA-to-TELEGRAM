@@ -6,7 +6,7 @@ Upload named folders from MEGA (or your PC) to a Telegram group as media albums,
 - Downloads straight from a public MEGA folder link, or uses folders already on disk
 - Signs in as your own Telegram account, so files up to 2 GB are supported
 - Resumes where it left off, waits out Telegram rate limits automatically, and skips damaged files instead of crashing
-- Comes as a desktop app (Tkinter GUI) and a command-line script
+- Simple desktop app: enter your settings in the window, no file editing needed
 
 ## Requirements
 
@@ -21,10 +21,12 @@ Upload named folders from MEGA (or your PC) to a Telegram group as media albums,
 ## Installation
 
 ```bash
-git clone https://github.com/<your-username>/mega-to-telegram.git
-cd mega-to-telegram
+git clone https://github.com/r11r33/MEGA-to-TELEGRAM.git
+cd MEGA-to-TELEGRAM
 pip install -r requirements.txt
 ```
+
+Or click **Code → Download ZIP** on GitHub and extract it.
 
 On Windows, use `py -m pip install -r requirements.txt` if `pip` isn't found.
 
@@ -39,11 +41,11 @@ If the page shows a plain `ERROR` when creating the app, disable any VPN or ad-b
 
 ## Usage
 
-### Desktop app
-
 ```bash
 python mega_to_telegram_gui.py      # Windows: py mega_to_telegram_gui.py
 ```
+
+All settings are entered in the app window. You don't need to edit any file.
 
 | Field | Value |
 | --- | --- |
@@ -56,24 +58,6 @@ python mega_to_telegram_gui.py      # Windows: py mega_to_telegram_gui.py
 Click **Start**. On the first run, pop-ups ask for your phone number, the Telegram login code, and your 2FA password if you have one. Settings are saved for next time.
 
 **Stop** finishes the current album and stops. **Reset upload history** makes everything upload again.
-
-### Command-line script
-
-Edit the config block at the top of `mega_to_telegram.py`:
-
-```python
-API_ID = 1234567
-API_HASH = "your_api_hash_here"
-GROUP = "https://t.me/yourgroup"
-MEGA_LINK = ""                        # leave empty to use LOCAL_DIR as-is
-LOCAL_DIR = Path("mega_download")
-```
-
-Then run:
-
-```bash
-python mega_to_telegram.py
-```
 
 ## How uploads are organised
 
@@ -103,13 +87,9 @@ MegaUpload/
 - A folder is marked done in `uploaded.json` only after all its files are sent. Rerun to continue; a folder interrupted midway starts again from its first album.
 - When Telegram rate-limits the account (`Telegram asked to wait 1133s…`), the app sleeps for that long and continues. Keep it running.
 
-## Running elsewhere
+## Platforms
 
-| Environment | Notes |
-| --- | --- |
-| macOS | `pip3 install -r requirements.txt`, `python3 mega_to_telegram.py` |
-| Google Cloud Shell | Install the MEGAcmd `.deb` for Ubuntu, run inside `tmux`. 5 GB disk, stops after ~20 idle minutes |
-| iSH (iOS) | `apk add python3 py3-pip`, `pip3 install telethon`. Save folders to Files from the MEGA app, `mount -t ios x /mnt/files`, set `LOCAL_DIR = Path("/mnt/files")`. Very slow |
+Built and tested for Windows. It also runs on macOS and Linux desktops with Python and Tk installed (`python3 mega_to_telegram_gui.py`). It needs a screen, so it won't run in headless environments like Cloud Shell or iSH.
 
 ## Troubleshooting
 
